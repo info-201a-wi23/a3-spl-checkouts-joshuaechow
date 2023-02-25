@@ -3,49 +3,61 @@ title: "A3: SPL Library Checkouts"
 output: html_document
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE)
+
+library("dplyr")
+library("stringr")
+library("ggplot2")
+
+source("chart1_example.R")
+source("chart2_example.R")
+source("chart3_example.R")
+```
+
 ### Introduction
 
 An introduction of the data and a description of the trends/books/items you are choosing to analyze (and why!)
+Seattle Public Library
+Dataset with items checked out at least 10 times a month from 2017-20203
+Ranging from Hardcopy books to Ebooks to even movies and music. 
+Curious to see what people have been checking out in terms of type, and then diving into the music part
+CS Lewis vs JRR Tolkien
 
 ### Summary Information
 
 Write a summary paragraph of findings that includes the 5 values calculated from your summary information R script
 
-These will likely be calculated using your DPLYR skills, answering questions such as:
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+library(dplyr)
+checkouts_df <- read.csv("C:/Users/hello/Downloads/2017-2023-10-Checkouts-SPL-Data.csv", stringsAsFactors = F)
 
-- What is the average number of checkouts for each item?
-- What is the month or year with the most/least checkouts for a book that you're interested in?
-- What is the month or year with the most/least checkouts for ebooks?
-- How has the number of print book checkouts changed over time?
+most_checked_out_year <- checkouts_df %>% group_by(CheckoutYear) %>% summarize(Checkouts = sum(Checkouts)) %>% filter(Checkouts == max(Checkouts)) %>% pull(CheckoutYear)
+least_checked_out_year <- checkouts_df %>% group_by(CheckoutYear) %>% summarize(Checkouts = sum(Checkouts)) %>% filter(Checkouts == min(Checkouts)) %>% pull(CheckoutYear)
+most_checked_out_type <- checkouts_df %>% group_by(MaterialType) %>% summarize(Checkouts = sum(Checkouts)) %>% filter(Checkouts == max(Checkouts)) %>% pull(MaterialType)
+digital_v_physical_more <- checkouts_df %>% group_by(UsageClass) %>% summarize(Checkouts = sum(Checkouts)) %>% filter(Checkouts == max(Checkouts)) %>% pull(UsageClass)
+digital_v_physical_less <- checkouts_df %>% group_by(UsageClass) %>% summarize(Checkouts = sum(Checkouts)) %>% filter(Checkouts == min(Checkouts)) %>% pull(UsageClass)
+highest_checkout <- checkouts_df %>% filter(Checkouts == max(Checkouts)) %>% pull(Checkouts)
+```
 
-Feel free to calculate and report values that you find relevant.
+`most_checked_out_year` `least_checked_out_year` `most_checked_out_type` `digital_v_physical_more` `digital_v_physical_less` `highest_checkout`
 
 ### The Dataset
 
-- Who collected/published the data?  
-- What are the parameters of the data (dates, number of checkouts, kinds of books, etc.)?
-- How was the data collected or generated?  
-- Why was the data collected?  
-- What, if any, ethical questions do you need to consider when working with this data?  
+- Who collected/published the data? seattle public library
+- What are the parameters of the data (dates, number of checkouts, kinds of books, etc.)? usageclass, checkouttype, materialtype, checkoutyear, checkoutmonth, checkouts, title
+- How was the data collected or generated? through checkout logs
+- Why was the data collected? 
+Improve public understanding of City operations and other information concerning their communities.
+Generate economic opportunity for individuals and companies that benefit from the knowledge created by Open Data.
+Empower City employees to be more effective, better coordinated internally, and able to identify opportunities to better serve the public
+Encourage the development of innovative technology solutions that improve quality of life.(According to seattle.gov)
+- What, if any, ethical questions do you need to consider when working with this data? 
 - What are possible limitations or problems with this data?   (at least 200 words)
-
 
 ### First Trends Over Time Chart
 
 Include a chart. Make sure to describe why you included the chart, and what patterns emerged
-
-The first chart that you will create and include will show the trend over time of your variable/topic/interest. Think carefully about what you want to communicate to your user (you may have to find relevant trends in the dataset first!). Here are some requirements to help guide your design:
-
-- Show more than one, but fewer than ~10 trends
-  - For example, two books, or 5 different mediums
-- You must have clear x and y axis labels
-- The chart needs a clear title 
-- You need a legend for your different line colors and a clear - legend title
-In your .Rmd file, make sure to describe why you included the chart, and what patterns emerged
-
-When we say "clear" or "human readable" titles and labels, that means that you should not just display the variable name.
-
-Here's an example of how to run an R script inside an RMarkdown file:
 
 ``````{r, echo = FALSE, warning = FALSE, code = readLines("chart1_example.R")}
 ```
@@ -54,33 +66,14 @@ Here's an example of how to run an R script inside an RMarkdown file:
 
 Include a chart. Make sure to describe why you included the chart, and what patterns emerged
 
-The second chart that you will create and include will show another trend over time of your variable/topic/interest. Think carefully about what you want to communicate to your user (you may have to find relevant trends in the dataset first!). Here are some requirements to help guide your design:
-
-- Show more than one, but fewer than ~10 trends
-  - For example, two books, or 5 different mediums
-- You must have clear x and y axis labels
-- The chart needs a clear title 
-- You need a legend for your different line colors and a clear - legend title
-In your .Rmd file, make sure to describe why you included the chart, and what patterns emerged
-
-When we say "clear" or "human readable" titles and labels, that means that you should not just display the variable name.
-
-Here's an example of how to run an R script inside an RMarkdown file:
-
 ``````{r, echo = FALSE, code = readLines("chart2_example.R")}
 ```
 
 ### Your Choice
 
-The last chart is up to you. It could be a line plot, scatter plot, histogram, bar plot, stacked bar plot, and more. Here are some requirements to help guide your design:
+Include a chart. Make sure to describe why you included the chart, and what patterns emerged
 
-- You must have clear x and y axis labels
-- The chart needs a clear title 
-- You need a legend for your different line colors and a clear legend title
-
-Here's an example of how to run an R script inside an RMarkdown file:
-
-``````{r, echo = FALSE, code = readLines("chart2_example.R")}
+``````{r, echo = FALSE, code = readLines("chart3_example.R")}
 ```
 
 
