@@ -17,16 +17,9 @@ source("chart3_example.R")
 
 ### Introduction
 
-An introduction of the data and a description of the trends/books/items you are choosing to analyze (and why!)
-Seattle Public Library
-Dataset with items checked out at least 10 times a month from 2017-20203
-Ranging from Hardcopy books to Ebooks to even movies and music. 
-Curious to see what people have been checking out in terms of type, and then diving into the music part
-CS Lewis vs JRR Tolkien
+This dataset is a dataset provided by the Seattle Public Library which shows items checked out at least 10 times a month from 2017-20203. The items checked out ranges from hard copy books to e-books to even movies and music. In the following graphs, we will be discovering which type of items has been checked out the most over time, as well as diving into various aspects of certain items, like authors of a book or genres of music.
 
 ### Summary Information
-
-Write a summary paragraph of findings that includes the 5 values calculated from your summary information R script
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
 library(dplyr)
@@ -40,38 +33,34 @@ digital_v_physical_less <- checkouts_df %>% group_by(UsageClass) %>% summarize(C
 highest_checkout <- checkouts_df %>% filter(Checkouts == max(Checkouts)) %>% pull(Checkouts)
 ```
 
-`most_checked_out_year` `least_checked_out_year` `most_checked_out_type` `digital_v_physical_more` `digital_v_physical_less` `highest_checkout`
+From the dataset provided by the Seattle Public Library, we have discovered many things about the checkout history. The year with the most checkouts is `most_checked_out_year`, while the year with the least checkouts is  `least_checked_out_year`. `most_checked_out_type` are the most checked out type, while `digital_v_physical_more` versions have been checked out more than `digital_v_physical_less`. However, this may have changed in recent times due to COVID. Finally, we discovered that the month with the higest checkouts have had `highest_checkout` checkouts that month!
 
 ### The Dataset
 
-- Who collected/published the data? seattle public library
-- What are the parameters of the data (dates, number of checkouts, kinds of books, etc.)? usageclass, checkouttype, materialtype, checkoutyear, checkoutmonth, checkouts, title
-- How was the data collected or generated? through checkout logs
-- Why was the data collected? 
-Improve public understanding of City operations and other information concerning their communities.
-Generate economic opportunity for individuals and companies that benefit from the knowledge created by Open Data.
-Empower City employees to be more effective, better coordinated internally, and able to identify opportunities to better serve the public
-Encourage the development of innovative technology solutions that improve quality of life.(According to seattle.gov)
-- What, if any, ethical questions do you need to consider when working with this data? 
-- What are possible limitations or problems with this data?   (at least 200 words)
+- Who collected/published the data? Seattle Public Library
+- What are the parameters of the data (dates, number of checkouts, kinds of books, etc.)? Type of usage (hardcopy vs electronic), Checkout type (Horizon, Overdrive, etc), Material type (Book, Movie, etc), Checkout year and checkout month, Number of checkouts, Title, Author/Creator, Publisher, Published year, and Subject/genre
+- How was the data collected or generated? The data was collected through the library logs.
+- Why was the data collected? According to seattle.gov, this data was collected to improve public understanding of City operations and other information concerning their communities, generate economic opportunity for individuals and companies that benefit from the knowledge created by Open Data, empower City employees to be more effective, better coordinated internally, and able to identify opportunities to better serve the public, and encourage the development of innovative technology solutions that improve quality of life.
+- What, if any, ethical questions do you need to consider when working with this data? The data only shows items with 10 or more checkouts per month. By filtering out items less than 10 checkouts per month, who or what voices are we excluding from the dataset?
+- What are possible limitations or problems with this data? This data only includes items with more than 10 checkouts per month. The names are not always necessarily consistent. Sometimes they are listed as first name last name, while other times they are listed as last name, first name. This makes sorting or grouping by the author difficult. The subjects/genre is not very consistent either. 
 
 ### First Trends Over Time Chart
 
-Include a chart. Make sure to describe why you included the chart, and what patterns emerged
+This chart reveals the checkouts by material type over time. I included this chart not only because it is interesting to see which material type is most popular, but because it is also interesting to see how COVID effected the checkouts of certain material types.
 
 ``````{r, echo = FALSE, warning = FALSE, code = readLines("chart1_example.R")}
 ```
 
 ### Second Trends Over Time Chart
 
-Include a chart. Make sure to describe why you included the chart, and what patterns emerged
+This chart reveals the checkouts by genre of music. I included this chart because music is something that generally doesn't come to mind when thinking about checking out from the library. With this graph, statistics of a group of people that are typically hidden and unknown are revealed.
 
 ``````{r, echo = FALSE, code = readLines("chart2_example.R")}
 ```
 
 ### Your Choice
 
-Include a chart. Make sure to describe why you included the chart, and what patterns emerged
+This chart reveals the checkouts of JRR Tolkien versus CS Lewis. I included this chart because they were two authors I read growing up, and I thought it would be fun to see who was more popular among the SPL.
 
 ``````{r, echo = FALSE, code = readLines("chart3_example.R")}
 ```
