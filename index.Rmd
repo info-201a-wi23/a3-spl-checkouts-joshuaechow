@@ -61,7 +61,7 @@ This chart reveals the checkouts by genre of music. I included this chart becaus
 ### Your Choice
 
 This chart reveals the checkouts of JRR Tolkien versus CS Lewis. I included this chart because they were two authors I read growing up, and I thought it would be fun to see who was more popular among the SPL.
-
+ 
 ``````{r, echo = FALSE, code = readLines("chart3_example.R")}
 ```
 
