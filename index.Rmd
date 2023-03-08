@@ -33,7 +33,7 @@ digital_v_physical_less <- checkouts_df %>% group_by(UsageClass) %>% summarize(C
 highest_checkout <- checkouts_df %>% filter(Checkouts == max(Checkouts)) %>% pull(Checkouts)
 ```
 
-From the dataset provided by the Seattle Public Library, we have discovered many things about the checkout history. The year with the most checkouts is `most_checked_out_year`, while the year with the least checkouts is  `least_checked_out_year`. `most_checked_out_type` are the most checked out type, while `digital_v_physical_more` versions have been checked out more than `digital_v_physical_less`. However, this may have changed in recent times due to COVID. Finally, we discovered that the month with the higest checkouts have had `highest_checkout` checkouts that month!
+From the dataset provided by the Seattle Public Library, we have discovered many things about the checkout history. The year with the most checkouts is `r most_checked_out_year`, while the year with the least checkouts is  `r least_checked_out_year`. `r most_checked_out_type` is the most checked out type, while `r digital_v_physical_more` versions have been checked out more than `r digital_v_physical_less`. However, this may have changed in recent times due to COVID. Finally, we discovered that the month with the higest checkouts have had `r highest_checkout` checkouts that month!
 
 ### The Dataset
 
